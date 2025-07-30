@@ -21,7 +21,10 @@
 
   /* Use CSS functions like radial-gradient and conic-gradient directly */
   --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
-  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
 }
 
 *,
@@ -31,13 +34,11 @@
 }
 
 html,
-body 
-#root,
+body #root,
 .app {
   height: 100%;
   width: 100%;
   @apply text-sm;
-  @apply bg-gray-500;
-  @apply text-gray-900;
+  @apply bg-white;
+  @apply dark:bg-black;
 }
-
