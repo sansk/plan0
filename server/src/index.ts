@@ -5,6 +5,11 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 /* ROUTE IMPORTS */
+import projectRoutes from "./routes/projectRoutes";
+import taskRoutes from "./routes/taskRoutes";
+// import searchRoutes from "./routes/searchRoutes";
+// import userRoutes from "./routes/userRoutes";
+// import teamRoutes from "./routes/teamRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -19,11 +24,17 @@ app.use(cors());
 
 /* ROUTES */
 app.get("/", (req, res) => {
-  res.send("This is home route");
+  res.send("Welcome! This is the server for the application.\n");
 });
+
+app.use("/projects", projectRoutes);
+app.use("/tasks", taskRoutes);
+// app.use("/search", searchRoutes);
+// app.use("/users", userRoutes);
+// app.use("/teams", teamRoutes);
 
 /* SERVER */
 const port = Number(process.env.PORT) || 3000;
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running on part ${port}`);
+  console.log(`Server running on port ${port}`);
 });
