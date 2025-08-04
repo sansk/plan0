@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/Header";
-// import ModalNewProject from "./ModalNewProject";
+import ModalNewProject from "./ModalNewProject";
 import {
   Clock,
   Filter,
@@ -25,10 +25,10 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
   return (
     <div className="px-4 xl:px-6">
       {/* MODAL NEW PROJECT */}
-      {/* <ModalNewProject
+      <ModalNewProject
         isOpen={isModalNewProjectOpen}
         onClose={() => setIsModalNewProjectOpen(false)}
-      /> */}
+      />
 
       <div className="pt-6 pb-6 lg:pt-8 lg:pb-4">
         <Header
