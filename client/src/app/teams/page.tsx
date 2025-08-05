@@ -1,23 +1,16 @@
 "use client";
+
 import { useGetTeamsQuery } from "@/state/api";
 import React from "react";
 import { useAppSelector } from "../redux";
 import Header from "@/components/Header";
-import {
-  DataGrid,
-  GridColDef,
-  GridToolbarContainer,
-  GridToolbarExport,
-  GridToolbarFilterButton,
-} from "@mui/x-data-grid";
+import { DataGrid, FilterPanelTrigger, GridColDef } from "@mui/x-data-grid";
+import { Toolbar, ToolbarButton, ExportCsv } from "@mui/x-data-grid";
+import Tooltip from "@mui/material/Tooltip";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
-
-const CustomToolbar = () => (
-  <GridToolbarContainer className="toolbar flex gap-2">
-    <GridToolbarFilterButton />
-    <GridToolbarExport />
-  </GridToolbarContainer>
-);
+import Badge from "@mui/material/Badge";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "Team ID", width: 100 },
@@ -29,6 +22,31 @@ const columns: GridColDef[] = [
     width: 200,
   },
 ];
+
+const CustomToolbar = () => (
+  <Toolbar className="toolbar flex gap-2">
+    <Tooltip title="Download as CSV">
+      <ExportCsv render={<ToolbarButton />}>
+        <FileDownloadIcon fontSize="small" />
+      </ExportCsv>
+    </Tooltip>
+    <Tooltip title="Filters">
+      <FilterPanelTrigger
+        render={(props, state) => (
+          <ToolbarButton {...props} color="default">
+            <Badge
+              badgeContent={state.filterCount}
+              color="primary"
+              variant="dot"
+            >
+              <FilterListIcon fontSize="small" />
+            </Badge>
+          </ToolbarButton>
+        )}
+      />
+    </Tooltip>
+  </Toolbar>
+);
 
 const Teams = () => {
   const { data: teams, isLoading, isError } = useGetTeamsQuery();
@@ -50,6 +68,7 @@ const Teams = () => {
           }}
           className={dataGridClassNames}
           sx={dataGridSxStyles(isDarkMode)}
+          showToolbar
         />
       </div>
     </div>
